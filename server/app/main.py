@@ -13,7 +13,6 @@ from app.config import settings
 from app.routers import auth, chat, documents, stats, users
 from app.utils.logger import get_logger, setup_logging
 
-# 初始化日志
 setup_logging()
 logger = get_logger(__name__)
 
