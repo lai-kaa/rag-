@@ -1,11 +1,17 @@
 /**
  * Axios 请求封装
+ *
+ * 开发环境：baseURL 默认 /api，由 Vite 代理到本地后端
+ * 生产环境：在构建时设置 VITE_API_BASE_URL 指向真实后端，例如
+ *   https://your-api.example.com/api
  */
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 
+const baseURL = import.meta.env.VITE_API_BASE_URL || '/api'
+
 const request = axios.create({
-  baseURL: '/api',
+  baseURL,
   timeout: 120000,
 })
 
@@ -28,7 +34,13 @@ request.interceptors.response.use(
 
     // 网络错误或后端未启动
     if (!error.response) {
-      ElMessage.error('无法连接后端服务，请确认 server 已启动（python run.py）')
+      ElMessage.error('无法连接后端服务，请确认 API 地址正确且后端已启动')
+      return Promise.reject(error)
+    }
+
+    // 生产环境未配置后端时，静态站点会对 /api 返回 405
+    if (status === 405 && baseURL === '/api' && import.meta.env.PROD) {
+      ElMessage.error('未配置后端 API 地址，请在构建时设置 VITE_API_BASE_URL')
       return Promise.reject(error)
     }
 
