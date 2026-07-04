@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.env
+.venv/
+venv/
+uploads/*
+!uploads/.gitkeep
+!uploads/samples/
+!uploads/samples/**
+chroma_data/
+logs/*.log
+*.egg-info/
+.idea/

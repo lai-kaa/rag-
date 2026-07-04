@@ -1,0 +1,14 @@
+# Conda 环境配置（推荐）
+# 用法: conda env create -f environment.yml
+#       conda activate rag-kb
+
+name: rag-kb
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - numpy<2.0
+  - pip:
+      - -r requirements.txt

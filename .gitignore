@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 环境变量（含 API Key，勿提交）
+.env
+**/.env
+
+# 后端运行时数据
+server/chroma_data/
+server/logs/
+server/app/logs/
+server/uploads/*
+!server/uploads/.gitkeep
+!server/uploads/samples/
+!server/uploads/samples/**
+
+# 前端
+client/node_modules/
+client/dist/
+
+# IDE / 系统
+.idea/
+.vscode/
+*.local
+.DS_Store
+Thumbs.db
