@@ -30,8 +30,6 @@
       </el-form>
 
       <div class="login-tip">
-        <p>测试账号：admin / 123456（管理员）</p>
-        <p>测试账号：user1 / 123456（普通用户）</p>
       </div>
     </div>
   </div>
