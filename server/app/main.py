@@ -45,11 +45,11 @@ app.add_middleware(
 )
 
 # 注册路由
-app.include_router(auth.router, prefix="/api")
-app.include_router(users.router, prefix="/api")
-app.include_router(documents.router, prefix="/api")
-app.include_router(chat.router, prefix="/api")
-app.include_router(stats.router, prefix="/api")
+app.include_router(auth.router)
+app.include_router(users.router)
+app.include_router(documents.router)
+app.include_router(chat.router)
+app.include_router(stats.router)
 
 
 @app.get("/", summary="健康检查")
