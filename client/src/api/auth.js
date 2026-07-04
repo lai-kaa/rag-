@@ -4,9 +4,9 @@
 import request from './request'
 
 export function login(data) {
-  return request.post('/api/auth/login', data)
+  return request.post('/auth/login', data)
 }
 
 export function getMe() {
-  return request.get('/api/auth/me')
+  return request.get('/auth/me')
 }
