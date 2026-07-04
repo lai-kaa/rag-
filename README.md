@@ -307,6 +307,37 @@ npm run dev
 
 完整接口文档：http://localhost:8000/docs
 
+## 生产部署建议
+
+```bash
+# 前端构建
+cd client && npm run build
+
+# 后端生产启动（关闭 reload）
+cd server
+uvicorn app.main:app --host 0.0.0.0 --port 8000
+```
+
+- 将 `.env` 中 `JWT_SECRET` 改为强随机字符串
+- 生产环境配置 Nginx 反向代理与 HTTPS
+- 定期备份 MySQL 与 `chroma_data/` 目录
+
+### Cloudflare Pages 部署前端
+
+Cloudflare Pages **只能托管静态前端**，无法运行 FastAPI。若未配置后端地址，登录时会报 **405 Method Not Allowed**。
+
+1. 将后端部署到公网可访问的服务器（VPS、内网穿透等），确保 `https://你的后端/api/auth/login` 可访问
+2. 在 Cloudflare Pages → **Settings → Environment variables** 添加：
+
+   | 变量名 | 值（示例） |
+   |--------|------------|
+   | `VITE_API_BASE_URL` | `https://your-backend.example.com/api` |
+
+3. **重新触发部署**（环境变量在构建时注入，改完后需 Rebuild）
+4. 构建命令：`npm run build`，输出目录：`dist`
+
+本地可参考 `client/.env.production.example`。开发环境仍使用 `/api` + Vite 代理，无需改动。
+
 ## 常见问题
 
 ### 登录无反应或 401
@@ -337,6 +368,11 @@ npm run dev
 - 后端需在 `server/` 目录执行 `python run.py`
 - 前端开发模式依赖 Vite 代理，后端须运行在 `:8000`
 
+### Cloudflare Pages 登录 405
+
+- 原因：前端请求发到了 Pages 静态站点自身的 `/api`，没有真实后端
+- 解决：部署后端并设置 `VITE_API_BASE_URL`，然后重新构建部署
+
 ### Python 依赖安装失败
 
 - 使用 `conda activate rag-kb`（Python 3.11）
@@ -348,21 +384,6 @@ npm run dev
 |------|------|
 | `server/logs/app.log` | 应用运行日志 |
 | `server/logs/error.log` | 错误日志 |
-
-## 生产部署建议
-
-```bash
-# 前端构建
-cd client && npm run build
-
-# 后端生产启动（关闭 reload）
-cd server
-uvicorn app.main:app --host 0.0.0.0 --port 8000
-```
-
-- 将 `.env` 中 `JWT_SECRET` 改为强随机字符串
-- 生产环境配置 Nginx 反向代理与 HTTPS
-- 定期备份 MySQL 与 `chroma_data/` 目录
 
 ## 许可证
 
