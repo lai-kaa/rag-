@@ -70,6 +70,8 @@ class Settings:
     RAG_CHUNK_OVERLAP: int = int(os.getenv("RAG_CHUNK_OVERLAP", "120"))
     RAG_TOP_K: int = int(os.getenv("RAG_TOP_K", "6"))
     RAG_HISTORY_TURNS: int = int(os.getenv("RAG_HISTORY_TURNS", "5"))
+    # 引用来源最低相似度（仅影响前端展示，不过滤 LLM 上下文）
+    RAG_SOURCE_MIN_SCORE: float = float(os.getenv("RAG_SOURCE_MIN_SCORE", "0.25"))
 
     CHROMA_PERSIST_DIR: str = os.getenv("CHROMA_PERSIST_DIR", str(BASE_DIR / "chroma_data"))
     UPLOAD_DIR: str = os.getenv("UPLOAD_DIR", str(BASE_DIR / "uploads"))

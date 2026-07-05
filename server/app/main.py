@@ -88,10 +88,17 @@ app.include_router(stats.router)
 def root():
     """服务健康检查接口。"""
     db_ok = check_database_connection()
+    vector_count = None
+    try:
+        from app.services.rag_service import get_rag_service
+        vector_count = get_rag_service().vectorstore._collection.count()
+    except Exception:
+        pass
     return {
         "message": "企业知识库 RAG 问答系统运行中",
         "version": "1.0.0",
         "database": "ok" if db_ok else "error",
+        "vector_count": vector_count,
     }
 
 
