@@ -28,6 +28,8 @@ async def lifespan(app: FastAPI):
     logger.info("企业知识库 RAG 问答系统已关闭")
 
 
+
+
 app = FastAPI(
     title="企业知识库 RAG 问答系统",
     description="基于 LangChain + Ollama + Chroma 的企业内部知识库问答 Agent",
@@ -38,7 +40,10 @@ app = FastAPI(
 # 跨域配置
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://laika1.pages.dev"
+        "http://localhost:5173"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
