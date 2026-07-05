@@ -14,11 +14,18 @@ class Settings:
     """全局配置类，集中管理所有配置项。"""
 
     # MySQL 数据库配置
+    #MYSQL_HOST: str = os.getenv("MYSQL_HOST", "localhost")
+    #MYSQL_PORT: int = int(os.getenv("MYSQL_PORT", "3306"))cd
+    #MYSQL_USER: str = os.getenv("MYSQL_USER", "root")
+    #MYSQL_PASSWORD: str = os.getenv("MYSQL_PASSWORD", "1234")
+    #MYSQL_DATABASE: str = os.getenv("MYSQL_DATABASE", "db")
+
     MYSQL_HOST: str = os.getenv("MYSQL_HOST", "localhost")
     MYSQL_PORT: int = int(os.getenv("MYSQL_PORT", "3306"))
     MYSQL_USER: str = os.getenv("MYSQL_USER", "root")
     MYSQL_PASSWORD: str = os.getenv("MYSQL_PASSWORD", "1234")
     MYSQL_DATABASE: str = os.getenv("MYSQL_DATABASE", "db")
+
 
     @property
     def DATABASE_URL(self) -> str:
