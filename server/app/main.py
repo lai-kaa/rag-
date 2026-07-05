@@ -41,7 +41,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://laika1.pages.dev"
+        "https://laika1.pages.dev",
         "http://localhost:5173"
     ],
     allow_credentials=True,
