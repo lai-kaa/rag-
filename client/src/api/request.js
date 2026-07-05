@@ -32,9 +32,9 @@ request.interceptors.response.use(
     const detail = error.response?.data?.detail
     const isLoginRequest = error.config?.url?.includes('/auth/login')
 
-    // 网络错误或后端未启动
+    // 网络错误、CORS 拦截或后端未启动（浏览器常将 500 无 CORS 头误报为 Network Error）
     if (!error.response) {
-      ElMessage.error('无法连接后端服务，请确认 API 地址正确且后端已启动')
+      ElMessage.error('无法连接后端，请确认后端已启动、API 地址与 CORS 配置正确')
       return Promise.reject(error)
     }
 

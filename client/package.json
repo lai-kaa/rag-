@@ -4,9 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/free-port.cjs 5173",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev:clean": "vite --force"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",

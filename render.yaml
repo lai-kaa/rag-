@@ -1,0 +1,34 @@
+# Render 部署参考（https://render.com）
+# 在 Render Dashboard → Web Service → Environment 中配置以下变量
+
+services:
+  - type: web
+    name: rag-laika
+    env: python
+    buildCommand: pip install -r server/requirements.txt
+    startCommand: cd server && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: MYSQL_HOST
+        sync: false
+      - key: MYSQL_PORT
+        value: "3306"
+      - key: MYSQL_USER
+        sync: false
+      - key: MYSQL_PASSWORD
+        sync: false
+      - key: MYSQL_DATABASE
+        value: db
+      - key: MYSQL_SSL
+        value: "true"
+      - key: CORS_ORIGINS
+        value: http://localhost:5173,https://a1e5655f.laika1.pages.dev
+      - key: CORS_ORIGIN_REGEX
+        value: https://.*\.(pages\.dev|pages\.cloudflare\.com)$
+      - key: LLM_PROVIDER
+        value: deepseek
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: EMBED_API_KEY
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
