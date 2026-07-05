@@ -40,10 +40,7 @@ app = FastAPI(
 # 跨域配置
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://laika1.pages.dev",
-        "http://localhost:5173"
-    ],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
